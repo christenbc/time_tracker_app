@@ -16,7 +16,6 @@ class SignInPage extends StatelessWidget { // alt+Ent to show dependencies to re
             Container(
               color: Colors.orange,
               child: SizedBox(
-                width: 100.0,
                 height: 100.0,
               ),
             )
