@@ -11,6 +11,7 @@ class SignInPage extends StatelessWidget { // alt+Ent to show dependencies to re
       body: Container(
         color: Colors.yellow,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
               color: Colors.orange,
