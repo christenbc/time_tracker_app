@@ -4,7 +4,7 @@ class CustomRaisedButton extends StatelessWidget {
   CustomRaisedButton({ // constructor
     this.child,
     this.color,
-    this.borderRadius,
+    this.borderRadius : 2.0, // default value
     this.onPressed,
   });
 
