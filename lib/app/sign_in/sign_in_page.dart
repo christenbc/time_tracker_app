@@ -25,18 +25,21 @@ class SignInPage extends StatelessWidget {
               height: 100.0,
             ),
           ),
+          SizedBox(height: 8.0),
           Container(
             color: Colors.red,
             child: SizedBox(
               height: 100.0,
             ),
           ),
+          SizedBox(height: 8.0),
           Container(
             color: Colors.purple,
             child: SizedBox(
               height: 100.0,
             ),
           ),
+          SizedBox(height: 8.0),
         ],
       ),
     );
