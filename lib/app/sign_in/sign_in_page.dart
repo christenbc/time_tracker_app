@@ -8,6 +8,9 @@ class SignInPage extends StatelessWidget { // alt+Ent to show dependencies to re
         title: Text('Time Tracker'),
         elevation: 2.0,
       ),
+      body: Container(
+        color: Colors.yellow,
+      ),
     );
   }
 }
