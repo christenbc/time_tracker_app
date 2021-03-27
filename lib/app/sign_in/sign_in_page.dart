@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:time_tracker/common_widgets/custom_raised_button.dart';
 
 class SignInPage extends StatelessWidget {
   // alt+Ent to show dependencies to red variables
@@ -24,10 +25,7 @@ class SignInPage extends StatelessWidget {
           Text(
             'Sign in',
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 32.0,
-              fontWeight: FontWeight.w600
-            ),
+            style: TextStyle(fontSize: 32.0, fontWeight: FontWeight.w600),
           ),
           SizedBox(height: 8.0),
           RaisedButton(
@@ -42,16 +40,18 @@ class SignInPage extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(4.0),
-              )
+              ),
             ),
             onPressed: _signInWithGoogle, // it is possible to set it null
-          )
+          ),
+          SizedBox(height: 8.0),
+          CustomRaisedButton(),
         ],
       ),
     );
   }
 
-  void _signInWithGoogle(){
+  void _signInWithGoogle() {
     // TODO: Auth with Google
   }
 }
