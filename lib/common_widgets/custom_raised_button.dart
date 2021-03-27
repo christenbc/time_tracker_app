@@ -5,18 +5,20 @@ class CustomRaisedButton extends StatelessWidget {
     this.child,
     this.color,
     this.borderRadius : 2.0, // default value
+    this.height : 50.0,
     this.onPressed,
   });
 
   final Widget child;
   final Color color;
   final double borderRadius;
+  final double height;
   final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox( // alt + Ent to Raised button and then wrap with widget
-      height: 50.0,
+      height: height,
       child: RaisedButton(
         child: child,
         color: color,
