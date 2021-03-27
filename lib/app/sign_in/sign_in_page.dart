@@ -45,7 +45,18 @@ class SignInPage extends StatelessWidget {
             onPressed: _signInWithGoogle, // it is possible to set it null
           ),
           SizedBox(height: 8.0),
-          CustomRaisedButton(),
+          CustomRaisedButton(
+            child: Text(
+              'Sign in with Facebook',
+              style: TextStyle(
+                color: Colors.black87,
+                fontSize: 15.0,
+              ),
+            ),
+            color: Colors.white,
+            borderRadius: 4.0,
+            onPressed: _signInWithGoogle,
+          ),
         ],
       ),
     );
