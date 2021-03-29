@@ -28,7 +28,7 @@ class SignInPage extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 32.0, fontWeight: FontWeight.w600),
           ),
-          SizedBox(height: 4g8.0),
+          SizedBox(height: 48.0),
           SignInButton(
             text: 'Sign in with Google',
             textColor: Colors.black87,
@@ -62,6 +62,7 @@ class SignInPage extends StatelessWidget {
             color: Colors.lime[300],
             onPressed: () {},
           ),
+          Image.asset('images/google-logo.png'),
         ],
       ),
     );

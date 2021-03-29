@@ -50,7 +50,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - images/google-logo.png
-    - images/facebook-logo.png
+    - images/facebook-logo.png # then run in the terminal flutter packages get
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
