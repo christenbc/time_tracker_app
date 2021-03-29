@@ -30,7 +30,11 @@ class SignInPage extends StatelessWidget {
           ),
           SizedBox(height: 48.0),
           CustomRaisedButton(
-            child: Image.asset('images/google-logo.png'),
+            child: Row(
+              children: [
+                Image.asset('images/google-logo.png'),
+              ],
+            ),
             color: Colors.white,
             onPressed: () {},
           ),
