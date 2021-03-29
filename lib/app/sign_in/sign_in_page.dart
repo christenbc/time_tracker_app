@@ -54,7 +54,7 @@ class SignInPage extends StatelessWidget {
             'or',
             style: TextStyle(fontSize: 14.0, color: Colors.black87),
             textAlign: TextAlign.center,
-            ),
+          ),
           SizedBox(height: 8.0),
           SignInButton(
             text: 'Go anonymous',
@@ -62,10 +62,13 @@ class SignInPage extends StatelessWidget {
             color: Colors.lime[300],
             onPressed: () {},
           ),
-          Image.asset('images/google-logo.png'),
+          CustomRaisedButton(
+            child: Image.asset('images/google-logo.png'),
+            color: Colors.white,
+            onPressed: () {},
+          ),
         ],
       ),
     );
   }
-
 }
