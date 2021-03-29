@@ -31,8 +31,10 @@ class SignInPage extends StatelessWidget {
           SizedBox(height: 48.0),
           CustomRaisedButton(
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Image.asset('images/google-logo.png'),
+                Text('Sign in with Google'),
               ],
             ),
             color: Colors.white,
