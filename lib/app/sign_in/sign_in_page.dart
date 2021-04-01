@@ -7,8 +7,13 @@ import 'package:time_tracker/common_widgets/custom_raised_button.dart';
 class SignInPage extends StatelessWidget {
 
   Future<void> _signInAnonymously() async {
-    final userCredentials = await FirebaseAuth.instance.signInAnonymously(); // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
-    print('${userCredentials.user.uid}');
+    try {
+      final userCredentials = await FirebaseAuth.instance
+          .signInAnonymously(); // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
+      print('${userCredentials.user.uid}');
+    } catch(e) {
+      print(e.toString());
+    }
   }
 
   // alt+Ent to show dependencies to red variables
@@ -70,7 +75,7 @@ class SignInPage extends StatelessWidget {
             text: 'Go anonymous',
             textColor: Colors.black,
             color: Colors.lime[300],
-            onPressed: _signInAnonymously,
+            onPressed: _signInAnonymously, // if it'd take arguments, then'd be () => _signInAnonymously()
           ),
         ],
       ),
