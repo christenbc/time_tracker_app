@@ -7,7 +7,7 @@ import 'package:time_tracker/common_widgets/custom_raised_button.dart';
 class SignInPage extends StatelessWidget {
 
   Future<void> _signInAnonymously() async {
-    try {
+    try { // good practice to asynchronous apis
       final userCredentials = await FirebaseAuth.instance
           .signInAnonymously(); // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
       print('${userCredentials.user.uid}');
