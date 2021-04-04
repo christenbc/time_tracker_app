@@ -12,14 +12,16 @@ class _LandingPageState extends State<LandingPage> {
   User _user;
 
   void _updateUser(User user){
-    print('User id: ${user.uid}');
+    setState(() {
+      _user = user;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     if (_user == null){
       return SignInPage(
-        onSignIn: (user) =>_updateUser(user),
+        onSignIn: (user) =>_updateUser(user), // the same as onSignIn: _updateUser
       );
     }
     return Container(); // temporary placeholder for HomePage
