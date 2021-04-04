@@ -12,6 +12,12 @@ class _LandingPageState extends State<LandingPage> {
 
   User _user;
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   void _updateUser(User user){
     setState(() {
       _user = user;
