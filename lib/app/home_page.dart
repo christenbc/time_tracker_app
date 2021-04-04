@@ -2,11 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
-  Future<void> _signInAnonymously() async {
+
+  Future<void> _signOut() async {
     try {
-      // good practice to asynchronous apis
-      final userCredentials = await FirebaseAuth.instance.signInAnonymously(); // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
-      onSignIn(userCredentials.user);
+      await FirebaseAuth.instance.signOut(); // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
+
     } catch (e) {
       print(e.toString());
     }
@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
               'Logout',
               style: TextStyle(fontSize: 18.0, color: Colors.white),
             ),
-            onPressed: () {},
+            onPressed: _signOut,
           )
         ],
       ),
