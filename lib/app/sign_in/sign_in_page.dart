@@ -5,14 +5,14 @@ import 'package:time_tracker/app/sign_in/social_sign_in_button.dart';
 import 'package:time_tracker/common_widgets/custom_raised_button.dart';
 
 class SignInPage extends StatelessWidget {
-  const SignInPage({Key key, this.onSignIn}) : super(key: key);
+  const SignInPage({Key key, @required this.onSignIn}) : super(key: key);
   final void Function(User) onSignIn;
 
   Future<void> _signInAnonymously() async {
     try { // good practice to asynchronous apis
       final userCredentials = await FirebaseAuth.instance
           .signInAnonymously(); // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
-      print('${userCredentials.user.uid}');
+      onSignIn(userCredentials.user);
     } catch(e) {
       print(e.toString());
     }
