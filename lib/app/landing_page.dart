@@ -18,8 +18,10 @@ class _LandingPageState extends State<LandingPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    widget.auth.authStateChanges().listen((user) {
+      print('uid: ${user?.uid}'); // ? to prevent runtime exception when user signs out
+    });
     _updateUser(widget.auth.currentUser); // add widget. so that auth variable is accessible
   }
 
