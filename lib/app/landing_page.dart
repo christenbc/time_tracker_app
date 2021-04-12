@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:time_tracker/app/home_page.dart';
 import 'package:time_tracker/app/sign_in/sign_in_page.dart';
@@ -19,9 +20,6 @@ class _LandingPageState extends State<LandingPage> {
   @override
   void initState() {
     super.initState();
-    widget.auth.authStateChanges().listen((user) {
-      print('uid: ${user?.uid}'); // ? to prevent runtime exception when user signs out
-    });
     _updateUser(widget.auth.currentUser); // add widget. so that auth variable is accessible
   }
 
@@ -33,15 +31,23 @@ class _LandingPageState extends State<LandingPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (_user == null){
-      return SignInPage(
-        auth: widget.auth,
-        onSignIn: (user) =>_updateUser(user), // the same as onSignIn: _updateUser
-      );
-    }
-    return HomePage(
-      auth: widget.auth,
-      onSignOut: () => _updateUser(null),
+    return StreamBuilder(
+      stream: widget.auth.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.active){
+            final user = snapshot.data;
+            if (user == null){
+              return SignInPage(
+                auth: widget.auth,
+                onSignIn: (user) =>_updateUser(user), // the same as onSignIn: _updateUser
+              );
+            }
+            return HomePage(
+              auth: widget.auth,
+              onSignOut: () => _updateUser(null),
+            );
+          }
+        }
     );
   }
 }
