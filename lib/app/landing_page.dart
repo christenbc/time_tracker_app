@@ -33,10 +33,12 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     if (_user == null){
       return SignInPage(
+        auth: widget.auth,
         onSignIn: (user) =>_updateUser(user), // the same as onSignIn: _updateUser
       );
     }
     return HomePage(
+      auth: widget.auth,
       onSignOut: () => _updateUser(null),
     );
   }
