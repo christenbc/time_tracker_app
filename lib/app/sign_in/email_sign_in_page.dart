@@ -12,5 +12,9 @@ class EmailSignInPage extends StatelessWidget {
       backgroundColor: Colors.grey[200],
     );
   }
+
+  Widget _buildContent() {
+    return Container();
+  }
 }
 
