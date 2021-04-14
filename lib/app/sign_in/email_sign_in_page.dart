@@ -8,7 +8,7 @@ class EmailSignInPage extends StatelessWidget {
         title: Text('Sign in'),
         elevation: 2.0,
       ),
-      body: _buildContent(),
+      body: widget(child: _buildContent()),
       backgroundColor: Colors.grey[200],
     );
   }
