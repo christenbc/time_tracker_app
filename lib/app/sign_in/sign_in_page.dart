@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:time_tracker/app/sign_in/email_sign_in_page.dart';
 import 'package:time_tracker/app/sign_in/sign_in_button.dart';
 import 'package:time_tracker/app/sign_in/social_sign_in_button.dart';
 import 'package:time_tracker/common_widgets/custom_raised_button.dart';
@@ -9,23 +10,32 @@ class SignInPage extends StatelessWidget {
   final AuthBase auth;
 
   Future<void> _signInAnonymously() async {
-    try { // good practice to asynchronous apis
-      await auth.signInAnonymously(); // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
-    } catch(e) {
+    try {
+      // good practice to asynchronous apis
+      await auth
+          .signInAnonymously(); // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
+    } catch (e) {
       print(e.toString());
     }
   }
 
   Future<void> _signInWithGoogle() async {
-    try { // good practice to asynchronous apis
-      await auth.signInWithGoogle(); // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
-    } catch(e) {
+    try {
+      // good practice to asynchronous apis
+      await auth
+          .signInWithGoogle(); // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
+    } catch (e) {
       print(e.toString());
     }
   }
 
-  void _signInWithEmail(BuildContext context){
-    // TODO: Show EmailSignInPage
+  void _signInWithEmail(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        fullscreenDialog: true,
+        builder: (context) => EmailSignInPage(),
+      ),
+    );
   }
 
   // alt+Ent to show dependencies to red variables
@@ -87,7 +97,8 @@ class SignInPage extends StatelessWidget {
             text: 'Go anonymous',
             textColor: Colors.black,
             color: Colors.lime[300],
-            onPressed: _signInAnonymously, // if it'd take arguments, then'd be () => _signInAnonymously()
+            onPressed:
+                _signInAnonymously, // if it'd take arguments, then'd be () => _signInAnonymously()
           ),
         ],
       ),
