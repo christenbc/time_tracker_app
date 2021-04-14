@@ -24,6 +24,10 @@ class SignInPage extends StatelessWidget {
     }
   }
 
+  void _signInWithEmail(BuildContext context){
+    // TODO: Show EmailSignInPage
+  }
+
   // alt+Ent to show dependencies to red variables
   @override
   Widget build(BuildContext context) {
