@@ -9,12 +9,14 @@ class EmailSignInForm extends StatelessWidget {
           hintText: 'text@test.com',
         ),
       ),
+      SizedBox(height: 8.0),
       TextField(
         decoration: InputDecoration(
           labelText: 'Password',
         ),
         obscureText: true,
       ),
+      SizedBox(height: 8.0),
       RaisedButton(
           child: Text('Sign in'),
           onPressed: () {},
@@ -31,6 +33,7 @@ class EmailSignInForm extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min, // minimize the length of the column
         children: _buildChildren(),
       ),
