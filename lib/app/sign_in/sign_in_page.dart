@@ -16,6 +16,14 @@ class SignInPage extends StatelessWidget {
     }
   }
 
+  Future<void> _signInWithGoogle() async {
+    try { // good practice to asynchronous apis
+      await auth.signInWithGoogle(); // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
+    } catch(e) {
+      print(e.toString());
+    }
+  }
+
   // alt+Ent to show dependencies to red variables
   @override
   Widget build(BuildContext context) {
@@ -47,7 +55,7 @@ class SignInPage extends StatelessWidget {
             text: 'Sign in with Google',
             textColor: Colors.black87,
             color: Colors.white,
-            onPressed: () {},
+            onPressed: _signInWithGoogle,
           ),
           SizedBox(height: 8.0),
           SocialSignInButton(
