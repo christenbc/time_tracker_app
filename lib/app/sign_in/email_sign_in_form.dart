@@ -9,6 +9,12 @@ class EmailSignInForm extends StatelessWidget {
           hintText: 'text@test.com',
         ),
       ),
+      TextField(
+        decoration: InputDecoration(
+          labelText: 'Password',
+        ),
+        obscureText: true,
+      )
     ];
   }
 
