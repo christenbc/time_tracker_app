@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:time_tracker/common_widgets/form_submit_button.dart';
 
 class EmailSignInForm extends StatelessWidget {
   List<Widget> _buildChildren(){
@@ -17,8 +18,8 @@ class EmailSignInForm extends StatelessWidget {
         obscureText: true,
       ),
       SizedBox(height: 8.0),
-      RaisedButton(
-          child: Text('Sign in'),
+      FormSubmitButton(
+          text: 'Sign in',
           onPressed: () {},
       ),
       FlatButton(
