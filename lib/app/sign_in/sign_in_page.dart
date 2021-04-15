@@ -22,8 +22,16 @@ class SignInPage extends StatelessWidget {
   Future<void> _signInWithGoogle() async {
     try {
       // good practice to asynchronous apis
-      await auth
-          .signInWithGoogle(); // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
+      await auth.signInWithGoogle(); // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  Future<void> _signInWithFacebook() async {
+    try {
+      // good practice to asynchronous apis
+      await auth.signInWithFacebook(); // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
     } catch (e) {
       print(e.toString());
     }
@@ -77,7 +85,7 @@ class SignInPage extends StatelessWidget {
             text: 'Sign in with Facebook',
             textColor: Colors.white,
             color: Color(0xFF334D92),
-            onPressed: () {},
+            onPressed: _signInWithFacebook,
           ),
           SizedBox(height: 8.0),
           SignInButton(
