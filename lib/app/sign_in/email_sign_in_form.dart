@@ -31,10 +31,14 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
   }
 
   void _submit() async {
-    if (_formType == EmailSignInFormType.signIn) {
-      await widget.auth.signInWithEmailAndPassword(_email, _password);
-    } else {
-      await widget.auth.createUserWithEmailAndPassword(_email, _password);
+    try {
+      if (_formType == EmailSignInFormType.signIn) {
+        await widget.auth.signInWithEmailAndPassword(_email, _password);
+      } else {
+        await widget.auth.createUserWithEmailAndPassword(_email, _password);
+      }
+    } catch (e) {
+      print(e.toString());
     }
   }
 
