@@ -53,6 +53,7 @@ class SignInPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Time Tracker'),
         elevation: 2.0,
+        centerTitle: true,
       ),
       body: _buildContent(context),
       backgroundColor: Colors.grey[200],

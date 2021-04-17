@@ -12,6 +12,7 @@ class EmailSignInPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Sign in'),
         elevation: 2.0,
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
