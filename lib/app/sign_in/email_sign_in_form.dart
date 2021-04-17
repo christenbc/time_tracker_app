@@ -26,9 +26,9 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
 
   void _toggleFormType() {
     setState(() {
+      _submitted = false;
       _formType = _formType == EmailSignInFormType.signIn
-          ? EmailSignInFormType.register
-          : EmailSignInFormType.signIn;
+          ? EmailSignInFormType.register : EmailSignInFormType.signIn;
     });
     _emailController.clear();
     _passwordController.clear();
