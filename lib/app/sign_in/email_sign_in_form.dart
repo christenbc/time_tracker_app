@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:time_tracker/common_widgets/form_submit_button.dart';
 
 class EmailSignInForm extends StatelessWidget {
+
+  void _submit(){
+    // TODO: print email and password
+  }
+
+
   List<Widget> _buildChildren(){
     return [
       TextField(
@@ -20,7 +26,7 @@ class EmailSignInForm extends StatelessWidget {
       SizedBox(height: 8.0),
       FormSubmitButton(
           text: 'Sign in',
-          onPressed: () {},
+          onPressed: _submit,
       ),
       FlatButton(
         child: Text('Need an account? Register'),
