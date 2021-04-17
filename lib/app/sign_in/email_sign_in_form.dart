@@ -33,7 +33,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
   }
 
   void _emailEditingComplete() {
-    print('email editing complete');
+    FocusScope.of(context).requestFocus(_passwordFocusNode);
   }
 
   void _submit() async {
@@ -81,6 +81,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
       ),
       obscureText: true,
       textInputAction: TextInputAction.done,
+      onEditingComplete: _submit,
     );
   }
 
