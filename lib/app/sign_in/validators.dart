@@ -3,5 +3,9 @@ abstract class StringValidator {
 }
 
 class NonEmptyStringValidator implements StringValidator {
-
+  @override
+  bool isValid(String value) {
+    // TODO: implement isValid
+    throw UnimplementedError();
+  }
 }
