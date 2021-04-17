@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:time_tracker/common_widgets/form_submit_button.dart';
 
-class EmailSignInForm extends StatelessWidget {
+class EmailSignInForm extends StatefulWidget {
+  @override
+  _EmailSignInFormState createState() => _EmailSignInFormState();
+}
+
+class _EmailSignInFormState extends State<EmailSignInForm> {
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
