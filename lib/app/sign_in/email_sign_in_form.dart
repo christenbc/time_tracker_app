@@ -15,8 +15,9 @@ class EmailSignInForm extends StatefulWidget {
 class _EmailSignInFormState extends State<EmailSignInForm> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  String email;
 
+  String get _email => _emailController.text;
+  String get _password => _passwordController.text;
   EmailSignInFormType _formType = EmailSignInFormType.signIn;
 
   void _toggleFormType() {
@@ -29,9 +30,12 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
     _passwordController.clear();
   }
 
-  void _submit() {
-    // TODO: print email and password
-    print('email: ${_emailController}, password: ${_passwordController}');
+  void _submit() async {
+    if (_formType == EmailSignInFormType.signIn) {
+      await widget.auth.signInWithEmailAndPassword(_email, _password);
+    } else {
+      await widget.auth.createUserWithEmailAndPassword(_email, _password);
+    }
   }
 
   List<Widget> _buildChildren() {
