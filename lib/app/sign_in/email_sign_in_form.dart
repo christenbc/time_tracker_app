@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:time_tracker/common_widgets/form_submit_button.dart';
+import 'package:time_tracker/services/auth.dart';
 
 enum EmailSignInFormType { signIn, register }
 
 class EmailSignInForm extends StatefulWidget {
+  const EmailSignInForm({Key key, @required this.auth}) : super(key: key);
+  final AuthBase auth;
+
   @override
   _EmailSignInFormState createState() => _EmailSignInFormState();
 }
