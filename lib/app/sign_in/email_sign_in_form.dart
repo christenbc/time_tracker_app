@@ -15,6 +15,7 @@ class EmailSignInForm extends StatelessWidget {
           labelText: 'Email',
           hintText: 'text@test.com',
         ),
+        onChanged: (value) => print(value),
       ),
       SizedBox(height: 8.0),
       TextField(
