@@ -7,7 +7,16 @@ import 'package:time_tracker/app/sign_in/social_sign_in_button.dart';
 import 'package:time_tracker/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker/services/auth.dart';
 
-class SignInPage extends StatelessWidget {
+
+
+class SignInPage extends StatefulWidget { // alt + ent --> convert to stateful widget
+  @override
+  _SignInPageState createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+  bool _isLoading = false;
+
   void _showSignInError(BuildContext context, Exception exception) {
     if (exception is FirebaseException && exception.code == 'ERROR_ABORTED_BY_USER') {
       return;
@@ -21,34 +30,43 @@ class SignInPage extends StatelessWidget {
 
   Future<void> _signInAnonymously(BuildContext context) async {
     try {
+      setState(() => _isLoading = true);
       final auth = Provider.of<AuthBase>(context, listen: false);
       // good practice to asynchronous apis
       await auth
           .signInAnonymously(); // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
     } on Exception catch (e) {
       _showSignInError(context, e);
+    } finally {
+      setState(() => _isLoading = false);
     }
   }
 
   Future<void> _signInWithGoogle(BuildContext context) async {
     try {
+      setState(() => _isLoading = true);
       final auth = Provider.of<AuthBase>(context, listen: false);
       // good practice to asynchronous apis
       await auth
           .signInWithGoogle(); // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
     } on Exception catch (e) {
       _showSignInError(context, e);
+    } finally {
+      setState(() => _isLoading = false);
     }
   }
 
   Future<void> _signInWithFacebook(BuildContext context) async {
     try {
+      setState(() => _isLoading = true);
       final auth = Provider.of<AuthBase>(context, listen: false);
       // good practice to asynchronous apis
       await auth
           .signInWithFacebook(); // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
     } on Exception catch (e) {
       _showSignInError(context, e);
+    } finally {
+      setState(() => _isLoading = false);
     }
   }
 
@@ -61,7 +79,6 @@ class SignInPage extends StatelessWidget {
     );
   }
 
-  // alt+Ent to show dependencies to red variables
   @override
   Widget build(BuildContext context) {
     return Scaffold(
