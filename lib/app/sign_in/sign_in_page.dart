@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:time_tracker/app/sign_in/email_sign_in_page.dart';
 import 'package:time_tracker/app/sign_in/sign_in_button.dart';
 import 'package:time_tracker/app/sign_in/social_sign_in_button.dart';
-import 'package:time_tracker/common_widgets/custom_raised_button.dart';
 import 'package:time_tracker/services/auth.dart';
-import 'package:time_tracker/services/auth_provider.dart';
 
 class SignInPage extends StatelessWidget {
   Future<void> _signInAnonymously(BuildContext context) async {
     try {
-      final auth = AuthProvider.of(context);
+      final auth = Provider.of<AuthBase>(context, listen: false);
       // good practice to asynchronous apis
       await auth
           .signInAnonymously(); // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
@@ -20,7 +19,7 @@ class SignInPage extends StatelessWidget {
 
   Future<void> _signInWithGoogle(BuildContext context) async {
     try {
-      final auth = AuthProvider.of(context);
+      final auth = Provider.of<AuthBase>(context, listen: false);
       // good practice to asynchronous apis
       await auth
           .signInWithGoogle(); // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
@@ -31,7 +30,7 @@ class SignInPage extends StatelessWidget {
 
   Future<void> _signInWithFacebook(BuildContext context) async {
     try {
-      final auth = AuthProvider.of(context);
+      final auth = Provider.of<AuthBase>(context, listen: false);
       // good practice to asynchronous apis
       await auth
           .signInWithFacebook(); // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
