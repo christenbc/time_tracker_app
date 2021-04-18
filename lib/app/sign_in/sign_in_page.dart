@@ -99,11 +99,8 @@ class _SignInPageState extends State<SignInPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            'Sign in',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 32.0, fontWeight: FontWeight.w600),
-          ),
+          _buildHeader(),
+
           SizedBox(height: 48.0),
           SocialSignInButton(
             assetName: 'images/google-logo.png',
@@ -143,6 +140,19 @@ class _SignInPageState extends State<SignInPage> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildHeader(){
+    if (_isLoading) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+    return Text(
+      'Sign in',
+      textAlign: TextAlign.center,
+      style: TextStyle(fontSize: 32.0, fontWeight: FontWeight.w600),
     );
   }
 }
