@@ -4,13 +4,12 @@ import 'package:time_tracker/app/sign_in/sign_in_button.dart';
 import 'package:time_tracker/app/sign_in/social_sign_in_button.dart';
 import 'package:time_tracker/common_widgets/custom_raised_button.dart';
 import 'package:time_tracker/services/auth.dart';
+import 'package:time_tracker/services/auth_provider.dart';
 
 class SignInPage extends StatelessWidget {
-  const SignInPage({Key key, @required this.auth}) : super(key: key);
-  final AuthBase auth;
-
-  Future<void> _signInAnonymously() async {
+  Future<void> _signInAnonymously(BuildContext context) async {
     try {
+      final auth = AuthProvider.of(context);
       // good practice to asynchronous apis
       await auth
           .signInAnonymously(); // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
@@ -19,19 +18,23 @@ class SignInPage extends StatelessWidget {
     }
   }
 
-  Future<void> _signInWithGoogle() async {
+  Future<void> _signInWithGoogle(BuildContext context) async {
     try {
+      final auth = AuthProvider.of(context);
       // good practice to asynchronous apis
-      await auth.signInWithGoogle(); // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
+      await auth
+          .signInWithGoogle(); // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
     } catch (e) {
       print(e.toString());
     }
   }
 
-  Future<void> _signInWithFacebook() async {
+  Future<void> _signInWithFacebook(BuildContext context) async {
     try {
+      final auth = AuthProvider.of(context);
       // good practice to asynchronous apis
-      await auth.signInWithFacebook(); // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
+      await auth
+          .signInWithFacebook(); // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
     } catch (e) {
       print(e.toString());
     }
@@ -41,7 +44,7 @@ class SignInPage extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         fullscreenDialog: true,
-        builder: (context) => EmailSignInPage(auth: auth),
+        builder: (context) => EmailSignInPage(),
       ),
     );
   }
@@ -78,7 +81,7 @@ class SignInPage extends StatelessWidget {
             text: 'Sign in with Google',
             textColor: Colors.black87,
             color: Colors.white,
-            onPressed: _signInWithGoogle,
+            onPressed: () => _signInWithGoogle(context),
           ),
           SizedBox(height: 8.0),
           SocialSignInButton(
@@ -86,7 +89,7 @@ class SignInPage extends StatelessWidget {
             text: 'Sign in with Facebook',
             textColor: Colors.white,
             color: Color(0xFF334D92),
-            onPressed: _signInWithFacebook,
+            onPressed: () => _signInWithFacebook(context),
           ),
           SizedBox(height: 8.0),
           SignInButton(
@@ -106,8 +109,8 @@ class SignInPage extends StatelessWidget {
             text: 'Go anonymous',
             textColor: Colors.black,
             color: Colors.lime[300],
-            onPressed:
-                _signInAnonymously, // if it'd take arguments, then'd be () => _signInAnonymously()
+            onPressed: () => _signInAnonymously(
+                context), // if it'd take arguments, then'd be () => _signInAnonymously()
           ),
         ],
       ),
