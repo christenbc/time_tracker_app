@@ -9,6 +9,9 @@ import 'package:time_tracker/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker/services/auth.dart';
 
 class SignInPage extends StatelessWidget {
+  const SignInPage({Key key, @required this.bloc}) : super(key: key);
+  final SignInBloc bloc;
+
   // alt + ent --> convert to stateful widget
   static Widget create(BuildContext context) {
     // static is defined so that SignInBlock is only ever useful when we use it
@@ -16,7 +19,10 @@ class SignInPage extends StatelessWidget {
     // more maintainable code, better separation of concerns and better APIs
     return Provider<SignInBloc>(
       create: (_) => SignInBloc(),
-      child: SignInPage(),
+      child: Consumer<SignInBloc>( // choose Consume on a case-by-case basis
+        // to optimise for less boilerplate code
+        builder: (_, bloc, __) => SignInPage(bloc: bloc),
+      ),
     );
     // _ for arguments that are not needed
   }
@@ -34,7 +40,6 @@ class SignInPage extends StatelessWidget {
   }
 
   Future<void> _signInAnonymously(BuildContext context) async {
-    final bloc = Provider.of<SignInBloc>(context, listen: false);
     try {
       bloc.setIsLoading(true);
       final auth = Provider.of<AuthBase>(context, listen: false);
@@ -49,7 +54,6 @@ class SignInPage extends StatelessWidget {
   }
 
   Future<void> _signInWithGoogle(BuildContext context) async {
-    final bloc = Provider.of<SignInBloc>(context, listen: false);
     try {
       bloc.setIsLoading(true);
       final auth = Provider.of<AuthBase>(context, listen: false);
@@ -64,7 +68,6 @@ class SignInPage extends StatelessWidget {
   }
 
   Future<void> _signInWithFacebook(BuildContext context) async {
-    final bloc = Provider.of<SignInBloc>(context, listen: false);
     try {
       bloc.setIsLoading(true);
       final auth = Provider.of<AuthBase>(context, listen: false);
@@ -89,22 +92,21 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = Provider.of<SignInBloc>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text('Time Tracker'),
         elevation: 2.0,
         centerTitle: true,
       ),
-      body: StreamBuilder<bool>( // wrap with stream builder, but not the entire
-        // Scaffold because only reloads the body, not the AppBar
-        stream: bloc.isLoadingStream,
-        initialData: false,
-        builder: (context, snapshot) {
-          // snapshot variables: connectionState, hasError / error, hadData / data
-          return _buildContent(context, snapshot.data);
-        }
-      ),
+      body: StreamBuilder<bool>(
+          // wrap with stream builder, but not the entire
+          // Scaffold because only reloads the body, not the AppBar
+          stream: bloc.isLoadingStream,
+          initialData: false,
+          builder: (context, snapshot) {
+            // snapshot variables: connectionState, hasError / error, hadData / data
+            return _buildContent(context, snapshot.data);
+          }),
       backgroundColor: Colors.grey[200],
     );
   }
