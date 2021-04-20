@@ -2,14 +2,25 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:time_tracker/app/sign_in/email_sign_in_page.dart';
+import 'package:time_tracker/app/sign_in/sign_in_bloc.dart';
 import 'package:time_tracker/app/sign_in/sign_in_button.dart';
 import 'package:time_tracker/app/sign_in/social_sign_in_button.dart';
 import 'package:time_tracker/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker/services/auth.dart';
 
+class SignInPage extends StatefulWidget {
+  // alt + ent --> convert to stateful widget
+  static Widget create(BuildContext context) {
+    // static is defined so that SignInBlock is only ever useful when we use it
+    // together with the SignInPage
+    // more maintainable code, better separation of concerns and better APIs
+    return Provider<SignInBloc>(
+      create: (_) => SignInBloc(),
+      child: SignInPage(),
+    );
+    // _ for arguments that are not needed
+  }
 
-
-class SignInPage extends StatefulWidget { // alt + ent --> convert to stateful widget
   @override
   _SignInPageState createState() => _SignInPageState();
 }
@@ -18,7 +29,8 @@ class _SignInPageState extends State<SignInPage> {
   bool _isLoading = false;
 
   void _showSignInError(BuildContext context, Exception exception) {
-    if (exception is FirebaseException && exception.code == 'ERROR_ABORTED_BY_USER') {
+    if (exception is FirebaseException &&
+        exception.code == 'ERROR_ABORTED_BY_USER') {
       return;
     }
     showExceptionAlertDialog(
@@ -100,8 +112,8 @@ class _SignInPageState extends State<SignInPage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           SizedBox(
-              height: 50,
-              child: _buildHeader(),
+            height: 50,
+            child: _buildHeader(),
           ),
           SizedBox(height: 48.0),
           SocialSignInButton(
@@ -145,7 +157,7 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 
-  Widget _buildHeader(){
+  Widget _buildHeader() {
     if (_isLoading) {
       return Center(
         child: CircularProgressIndicator(),
