@@ -8,7 +8,7 @@ import 'package:time_tracker/app/sign_in/social_sign_in_button.dart';
 import 'package:time_tracker/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker/services/auth.dart';
 
-class SignInPage extends StatefulWidget {
+class SignInPage extends StatelessWidget {
   // alt + ent --> convert to stateful widget
   static Widget create(BuildContext context) {
     // static is defined so that SignInBlock is only ever useful when we use it
@@ -20,13 +20,6 @@ class SignInPage extends StatefulWidget {
     );
     // _ for arguments that are not needed
   }
-
-  @override
-  _SignInPageState createState() => _SignInPageState();
-}
-
-class _SignInPageState extends State<SignInPage> {
-  bool _isLoading = false;
 
   void _showSignInError(BuildContext context, Exception exception) {
     if (exception is FirebaseException &&
@@ -41,8 +34,9 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   Future<void> _signInAnonymously(BuildContext context) async {
+    final bloc = Provider.of<SignInBloc>(context, listen: false);
     try {
-      setState(() => _isLoading = true);
+      bloc.setIsLoading(true);
       final auth = Provider.of<AuthBase>(context, listen: false);
       // good practice to asynchronous apis
       await auth
@@ -50,13 +44,14 @@ class _SignInPageState extends State<SignInPage> {
     } on Exception catch (e) {
       _showSignInError(context, e);
     } finally {
-      setState(() => _isLoading = false);
+      bloc.setIsLoading(false);
     }
   }
 
   Future<void> _signInWithGoogle(BuildContext context) async {
+    final bloc = Provider.of<SignInBloc>(context, listen: false);
     try {
-      setState(() => _isLoading = true);
+      bloc.setIsLoading(true);
       final auth = Provider.of<AuthBase>(context, listen: false);
       // good practice to asynchronous apis
       await auth
@@ -64,13 +59,14 @@ class _SignInPageState extends State<SignInPage> {
     } on Exception catch (e) {
       _showSignInError(context, e);
     } finally {
-      setState(() => _isLoading = false);
+      bloc.setIsLoading(false);
     }
   }
 
   Future<void> _signInWithFacebook(BuildContext context) async {
+    final bloc = Provider.of<SignInBloc>(context, listen: false);
     try {
-      setState(() => _isLoading = true);
+      bloc.setIsLoading(true);
       final auth = Provider.of<AuthBase>(context, listen: false);
       // good practice to asynchronous apis
       await auth
@@ -78,7 +74,7 @@ class _SignInPageState extends State<SignInPage> {
     } on Exception catch (e) {
       _showSignInError(context, e);
     } finally {
-      setState(() => _isLoading = false);
+      bloc.setIsLoading(false);
     }
   }
 
@@ -122,7 +118,7 @@ class _SignInPageState extends State<SignInPage> {
         children: [
           SizedBox(
             height: 50,
-            child: _buildHeader(),
+            child: _buildHeader(isLoading),
           ),
           SizedBox(height: 48.0),
           SocialSignInButton(
@@ -130,7 +126,7 @@ class _SignInPageState extends State<SignInPage> {
             text: 'Sign in with Google',
             textColor: Colors.black87,
             color: Colors.white,
-            onPressed: _isLoading ? null : () => _signInWithGoogle(context),
+            onPressed: isLoading ? null : () => _signInWithGoogle(context),
           ),
           SizedBox(height: 8.0),
           SocialSignInButton(
@@ -138,14 +134,14 @@ class _SignInPageState extends State<SignInPage> {
             text: 'Sign in with Facebook',
             textColor: Colors.white,
             color: Color(0xFF334D92),
-            onPressed: _isLoading ? null : () => _signInWithFacebook(context),
+            onPressed: isLoading ? null : () => _signInWithFacebook(context),
           ),
           SizedBox(height: 8.0),
           SignInButton(
             text: 'Sign in with email',
             textColor: Colors.white,
             color: Colors.teal[700],
-            onPressed: _isLoading ? null : () => _signInWithEmail(context),
+            onPressed: isLoading ? null : () => _signInWithEmail(context),
           ),
           SizedBox(height: 8.0),
           Text(
@@ -158,7 +154,7 @@ class _SignInPageState extends State<SignInPage> {
             text: 'Go anonymous',
             textColor: Colors.black,
             color: Colors.lime[300],
-            onPressed: _isLoading ? null : () => _signInAnonymously(context),
+            onPressed: isLoading ? null : () => _signInAnonymously(context),
             // if it'd take arguments, then'd be () => _signInAnonymously()
           ),
         ],
@@ -166,8 +162,8 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 
-  Widget _buildHeader() {
-    if (_isLoading) {
+  Widget _buildHeader(bool isLoading) {
+    if (isLoading) {
       return Center(
         child: CircularProgressIndicator(),
       );
