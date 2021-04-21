@@ -19,6 +19,8 @@ class SignInPage extends StatelessWidget {
     // more maintainable code, better separation of concerns and better APIs
     return Provider<SignInBloc>(
       create: (_) => SignInBloc(),
+      dispose: (_, bloc) => bloc.dispose(), // when SignIn widget is removed
+      // from the widget tree, bloc widget is also disposed
       child: Consumer<SignInBloc>( // choose Consume on a case-by-case basis
         // to optimise for less boilerplate code
         builder: (_, bloc, __) => SignInPage(bloc: bloc),
@@ -92,6 +94,7 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = Provider.of<SignInBloc>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text('Time Tracker'),
