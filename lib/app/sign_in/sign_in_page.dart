@@ -14,11 +14,12 @@ class SignInPage extends StatelessWidget {
 
   // alt + ent --> convert to stateful widget
   static Widget create(BuildContext context) {
+    final auth = Provider.of<AuthBase>(context, listen: false);
     // static is defined so that SignInBlock is only ever useful when we use it
     // together with the SignInPage
     // more maintainable code, better separation of concerns and better APIs
     return Provider<SignInBloc>(
-      create: (_) => SignInBloc(),
+      create: (_) => SignInBloc(auth: auth),
       dispose: (_, bloc) => bloc.dispose(), // when SignIn widget is removed
       // from the widget tree, bloc widget is also disposed
       child: Consumer<SignInBloc>( // choose Consume on a case-by-case basis
@@ -43,43 +44,29 @@ class SignInPage extends StatelessWidget {
 
   Future<void> _signInAnonymously(BuildContext context) async {
     try {
-      bloc.setIsLoading(true);
-      final auth = Provider.of<AuthBase>(context, listen: false);
-      // good practice to asynchronous apis
-      await auth
-          .signInAnonymously(); // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
+      await bloc.signInAnonymously();
+      // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
     } on Exception catch (e) {
       _showSignInError(context, e);
-    } finally {
-      bloc.setIsLoading(false);
     }
   }
 
   Future<void> _signInWithGoogle(BuildContext context) async {
     try {
-      bloc.setIsLoading(true);
-      final auth = Provider.of<AuthBase>(context, listen: false);
-      // good practice to asynchronous apis
-      await auth
-          .signInWithGoogle(); // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
+      await bloc.signInWithGoogle();
+      // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
     } on Exception catch (e) {
       _showSignInError(context, e);
-    } finally {
-      bloc.setIsLoading(false);
     }
   }
 
   Future<void> _signInWithFacebook(BuildContext context) async {
     try {
-      bloc.setIsLoading(true);
-      final auth = Provider.of<AuthBase>(context, listen: false);
       // good practice to asynchronous apis
-      await auth
-          .signInWithFacebook(); // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
+      await bloc.signInWithFacebook();
+      // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
     } on Exception catch (e) {
       _showSignInError(context, e);
-    } finally {
-      bloc.setIsLoading(false);
     }
   }
 
