@@ -54,7 +54,7 @@ class _EmailSignInFormStatefulState extends State<EmailSignInFormStateful> {
     FocusScope.of(context).requestFocus(newFocus);
   }
 
-  void _submit() async {
+  Future<void> _submit() async {
     setState(() {
       _submitted = true;
       _isLoading = true;

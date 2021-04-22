@@ -11,6 +11,33 @@ class EmailSignInBloc {
     _modelController.close();
   }
 
+  Future<void> _submit() async {
+    setState(() {
+      _submitted = true;
+      _isLoading = true;
+    });
+    try {
+      final auth = Provider.of<AuthBase>(context, listen: false);
+      // await Future.delayed(Duration(seconds: 3));
+      if (_formType == EmailSignInFormType.signIn) {
+        await auth.signInWithEmailAndPassword(_email, _password);
+      } else {
+        await auth.createUserWithEmailAndPassword(_email, _password);
+      }
+      Navigator.of(context).pop();
+    } on FirebaseAuthException catch (e) {
+      showExceptionAlertDialog(
+        context,
+        title: 'Sign in failed',
+        exception: e,
+      );
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
   void updateWith({
     String email,
     String password,
