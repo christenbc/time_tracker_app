@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:time_tracker/app/sign_in/email_sign_in_bloc.dart';
-import 'package:time_tracker/app/sign_in/validators.dart';
 import 'package:time_tracker/common_widgets/form_submit_button.dart';
 import 'package:time_tracker/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker/services/auth.dart';
@@ -30,6 +29,8 @@ class EmailSignInFormBlocBased extends StatefulWidget {
 }
 
 class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
+  // text editing controller and focus node widgets internally modifies state,
+  // that is why a stateful widget is required
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final FocusNode _emailFocusNode = FocusNode();
@@ -129,6 +130,7 @@ class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
         initialData: EmailSignInModel(),
         builder: (context, snapshot) {
           final EmailSignInModel model = snapshot.data;
+          // print('email: ${model.email}, password: ${model.password}');
           return Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(

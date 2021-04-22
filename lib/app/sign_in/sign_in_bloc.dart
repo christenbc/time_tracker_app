@@ -4,43 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:time_tracker/services/auth.dart';
 
 class SignInBloc {
-  SignInBloc({@required this.auth});
+  SignInBloc({@required this.auth, @required this.isLoading});
   final AuthBase auth;
-
-  final StreamController<bool> _isLoadingController = StreamController<bool>();
-
-  Stream<bool> get isLoadingStream => _isLoadingController.stream;
-
-  void dispose() {
-    _isLoadingController.close();
-    // remove controller when sign in page is removed from the widget tree and
-    // we do not longer need the bloc
-  }
-
-  void _setIsLoading(bool isLoading) => _isLoadingController.add(isLoading);
+  final ValueNotifier<bool> isLoading;
 
   Future<User> _signIn(Future<User> Function() signInMethod) async {
     try {
-      _setIsLoading(true);
+      isLoading.value = true;
       return await signInMethod();
     } catch (e) {
+      isLoading.value = false;
       rethrow; // forwarding the exception to the calling code
-      _setIsLoading(false);
     }
   }
-
-  /* Instead of repeating this code several times...
-  Future<User> signInAnonymously() async {
-    try {
-      setIsLoading(true);
-      return await auth.signInAnonymously();
-    } catch {
-      rethrow; // forwarding the exception to the calling code
-    } finally {
-      setIsLoading(false);
-    }
-  }
-  */
 
   Future<User> signInAnonymously() async => await _signIn(auth.signInAnonymously);
 
