@@ -25,7 +25,6 @@ class SignInBloc {
       return await signInMethod();
     } catch (e) {
       rethrow; // forwarding the exception to the calling code
-    } finally {
       _setIsLoading(false);
     }
   }
