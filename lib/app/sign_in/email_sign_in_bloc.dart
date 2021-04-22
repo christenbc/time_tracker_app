@@ -1,9 +1,15 @@
 import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:time_tracker/app/sign_in/email_sign_in_model.dart';
+import 'package:time_tracker/services/auth.dart';
 
 class EmailSignInBloc {
+  EmailSignInBloc({@required this.auth});
+  final AuthBase auth;
+
   final StreamController<EmailSignInModel> _modelController =
       StreamController<EmailSignInModel>();
+
   Stream<EmailSignInModel> get modelStream => _modelController.stream;
   EmailSignInModel _model = EmailSignInModel();
 
@@ -11,30 +17,18 @@ class EmailSignInBloc {
     _modelController.close();
   }
 
-  Future<void> _submit() async {
-    setState(() {
-      _submitted = true;
-      _isLoading = true;
-    });
+  Future<void> submit() async {
+    updateWith(submitted: true, isLoading: true);
     try {
-      final auth = Provider.of<AuthBase>(context, listen: false);
       // await Future.delayed(Duration(seconds: 3));
-      if (_formType == EmailSignInFormType.signIn) {
-        await auth.signInWithEmailAndPassword(_email, _password);
+      if (_model.formType == EmailSignInFormType.signIn) {
+        await auth.signInWithEmailAndPassword(_model.email, _model.password);
       } else {
-        await auth.createUserWithEmailAndPassword(_email, _password);
+        await auth.createUserWithEmailAndPassword(_model.email, _model.password);
       }
-      Navigator.of(context).pop();
-    } on FirebaseAuthException catch (e) {
-      showExceptionAlertDialog(
-        context,
-        title: 'Sign in failed',
-        exception: e,
-      );
-    } finally {
-      setState(() {
-        _isLoading = false;
-      });
+    } catch (e) {
+      updateWith(isLoading: false);
+      rethrow;
     }
   }
 
