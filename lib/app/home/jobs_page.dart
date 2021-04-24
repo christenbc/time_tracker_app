@@ -86,6 +86,9 @@ class JobsPage extends StatelessWidget {
             // instead of Column to show an arbitrary number of elements and
             // be able to scroll down the list if they do not fit on the screen
           }
+          if (snapshot.hasError) {
+            return Center(child: Text('Some error ocurred'));
+          }
           return Center(child: CircularProgressIndicator());
         },
     );
