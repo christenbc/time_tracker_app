@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:time_tracker/app/home/models/job.dart';
 import 'package:time_tracker/services/database.dart';
 
 class AddJobPage extends StatefulWidget {
@@ -32,14 +33,11 @@ class _AddJobPageState extends State<AddJobPage> {
     return false;
   }
 
-  void _submit() {
+  Future<void> _submit() async {
     if (_validateAndSaveForm()) {
-      print('form saved, name: $_name, ratePerHour: $_ratePerHour');
-      // TODO: Submit data to firestore
-      // final database = Provider.of<Database>(context, listen: false);
-      // if we just declare this, we would have not the context of JobsPage
-      // but the context from Material App
-
+      final job = Job(name: _name, ratePerHour: _ratePerHour);
+      await widget.database.createJob(job);
+      Navigator.of(context).pop();
     }
   }
 
