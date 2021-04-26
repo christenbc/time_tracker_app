@@ -13,8 +13,9 @@ class AddJobPage extends StatefulWidget {
 }
 
 class _AddJobPageState extends State<AddJobPage> {
-
   final _formKey = GlobalKey<FormState>();
+  String _name;
+  int _ratePerHour;
 
   bool _validateAndSaveForm() {
     final form = _formKey.currentState;
@@ -27,7 +28,7 @@ class _AddJobPageState extends State<AddJobPage> {
 
   void _submit() {
     if (_validateAndSaveForm()) {
-      print('form saved');
+      print('form saved, name: $_name, ratePerHour: $_ratePerHour');
       // TODO: Submit data to firestore
     }
   }
@@ -84,6 +85,7 @@ class _AddJobPageState extends State<AddJobPage> {
     return [
       TextFormField(
         decoration: InputDecoration(labelText: 'Job name'),
+        onSaved: (value) => _name = value,
       ),
       TextFormField(
         decoration: InputDecoration(labelText: 'Rate Per Hour'),
@@ -91,6 +93,7 @@ class _AddJobPageState extends State<AddJobPage> {
           signed: false,
           decimal: false,
         ),
+        onSaved: (value) => _ratePerHour = int.parse(value) ?? 0,
       )
     ];
   }
