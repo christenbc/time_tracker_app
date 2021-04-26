@@ -21,6 +21,7 @@ class _AddJobPageState extends State<AddJobPage> {
         title: Text('New Job'),
       ),
       body: _buildContents(),
+      backgroundColor: Colors.grey[200],
     );
   }
 
@@ -31,12 +32,34 @@ class _AddJobPageState extends State<AddJobPage> {
         child: Card(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Placeholder(
-              fallbackHeight: 200,
-            ),
+            child: _buildForm(),
           ),
         ),
       ),
     );
+  }
+
+  Widget _buildForm() {
+    return Form(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: _buildFormChildren(),
+      ),
+    );
+  }
+
+  List<Widget> _buildFormChildren() {
+    return [
+      TextFormField(
+        decoration: InputDecoration(labelText: 'Job name'),
+      ),
+      TextFormField(
+        decoration: InputDecoration(labelText: 'Rate Per Hour'),
+        keyboardType: TextInputType.numberWithOptions(
+          signed: false,
+          decimal: false,
+        ),
+      )
+    ];
   }
 }
