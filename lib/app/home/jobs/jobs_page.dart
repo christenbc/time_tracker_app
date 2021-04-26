@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:time_tracker/app/home/jobs/add_job_page.dart';
 import 'package:time_tracker/app/home/models/job.dart';
 import 'package:time_tracker/common_widgets/show_alert_dialog.dart';
 import 'package:time_tracker/common_widgets/show_exception_alert_dialog.dart';
@@ -69,7 +70,7 @@ class JobsPage extends StatelessWidget {
       body: _buildContents(context),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () => _createJob(context),
+        onPressed: () => AddJobPage.show(context),
       ),
     );
   }
@@ -87,7 +88,7 @@ class JobsPage extends StatelessWidget {
             // be able to scroll down the list if they do not fit on the screen
           }
           if (snapshot.hasError) {
-            return Center(child: Text('Some error ocurred'));
+            return Center(child: Text('Some error occurred'));
           }
           return Center(child: CircularProgressIndicator());
         },

@@ -27,5 +27,4 @@ class FirestoreDatabase implements Database {
       builder: (data) => Job.fromMap(data),
   );
 
-
 }
