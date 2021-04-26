@@ -13,9 +13,23 @@ class AddJobPage extends StatefulWidget {
 }
 
 class _AddJobPageState extends State<AddJobPage> {
+
+  final _formKey = GlobalKey<FormState>();
+
+  bool _validateAndSaveForm() {
+    final form = _formKey.currentState;
+    if (form.validate()) {
+      form.save();
+      return true;
+    }
+    return false;
+  }
+
   void _submit() {
-    // TODO: Validate and save form
-    // TODO: Submit data to firestore
+    if (_validateAndSaveForm()) {
+      print('form saved');
+      // TODO: Submit data to firestore
+    }
   }
 
   @override
@@ -58,6 +72,7 @@ class _AddJobPageState extends State<AddJobPage> {
 
   Widget _buildForm() {
     return Form(
+      key: _formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: _buildFormChildren(),
