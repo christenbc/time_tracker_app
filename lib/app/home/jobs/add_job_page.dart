@@ -13,12 +13,29 @@ class AddJobPage extends StatefulWidget {
 }
 
 class _AddJobPageState extends State<AddJobPage> {
+  void _submit() {
+    // TODO: Validate and save form
+    // TODO: Submit data to firestore
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 2.0,
         title: Text('New Job'),
+        actions: [
+          FlatButton(
+            child: Text(
+              'Save',
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.white,
+              ),
+            ),
+            onPressed: _submit,
+          ),
+        ],
       ),
       body: _buildContents(),
       backgroundColor: Colors.grey[200],
