@@ -20,6 +20,13 @@ class _AddJobPageState extends State<AddJobPage> {
         elevation: 2.0,
         title: Text('New Job'),
       ),
+      body: _buildContents(),
+    );
+  }
+
+  Widget _buildContents() {
+    return Card(
+      child: Placeholder(),
     );
   }
 }
