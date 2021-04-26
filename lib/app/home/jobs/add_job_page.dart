@@ -31,7 +31,9 @@ class _AddJobPageState extends State<AddJobPage> {
         child: Card(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Placeholder(),
+            child: Placeholder(
+              fallbackHeight: 200,
+            ),
           ),
         ),
       ),
