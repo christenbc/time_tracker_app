@@ -25,8 +25,14 @@ class _AddJobPageState extends State<AddJobPage> {
   }
 
   Widget _buildContents() {
-    return Card(
-      child: Placeholder(),
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Placeholder(),
+        ),
+      ),
     );
   }
 }
