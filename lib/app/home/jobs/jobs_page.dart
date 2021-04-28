@@ -12,28 +12,6 @@ import 'package:time_tracker/services/auth.dart';
 import 'package:time_tracker/services/database.dart';
 
 class JobsPage extends StatelessWidget {
-  Future<void> _signOut(BuildContext context) async {
-    try {
-      final auth = Provider.of<AuthBase>(context, listen: false);
-      await auth
-          .signOut(); // since it returns a Future (see doc), add await and async. it is good practice to add Future <void>
-    } catch (e) {
-      print(e.toString());
-    }
-  }
-
-  Future<void> _confirmSignOut(BuildContext context) async {
-    final didRequestSignOut = await showAlertDialog(
-      context,
-      title: 'Logout',
-      content: 'Are you sure that you want to logout?',
-      cancelActionText: 'Cancel',
-      defaultActionText: 'Logout',
-    );
-    if (didRequestSignOut == true) {
-      _signOut(context);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,13 +27,6 @@ class JobsPage extends StatelessWidget {
               database: Provider.of<Database>(context, listen: false),
             ),
           ),
-          FlatButton(
-            child: Text(
-              'Logout',
-              style: TextStyle(fontSize: 18.0, color: Colors.white),
-            ),
-            onPressed: () => _confirmSignOut(context),
-          )
         ],
       ),
       body: _buildContents(context),
