@@ -6,15 +6,22 @@ import 'package:time_tracker/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker/services/database.dart';
 
 class EditJobPage extends StatefulWidget {
-  const EditJobPage({Key key, @required this.database, this.job}) : super(key: key);
+  const EditJobPage({Key key, @required this.database, this.job})
+      : super(key: key);
   final Database database;
   final Job job;
 
-  static Future<void> show(BuildContext context, {Database database, Job job}) async {
-    await Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => EditJobPage(database: database, job: job),
-      fullscreenDialog: true,
-    ));
+  static Future<void> show(
+    BuildContext context, {
+    Database database,
+    Job job,
+  }) async {
+    await Navigator.of(context, rootNavigator: true).push(
+      MaterialPageRoute(
+        builder: (context) => EditJobPage(database: database, job: job),
+        fullscreenDialog: true,
+      ),
+    );
   }
 
   @override
@@ -29,7 +36,7 @@ class _EditJobPageState extends State<EditJobPage> {
   @override
   void initState() {
     super.initState();
-    if (widget.job != null ) {
+    if (widget.job != null) {
       _name = widget.job.name;
       _ratePerHour = widget.job.ratePerHour;
     }
@@ -56,7 +63,7 @@ class _EditJobPageState extends State<EditJobPage> {
           showAlertDialog(
             context,
             title: 'Name already used',
-            content:'Please choose a different job name',
+            content: 'Please choose a different job name',
             defaultActionText: 'OK',
           );
         } else {
