@@ -57,13 +57,13 @@ class AccountPage extends StatelessWidget {
     return Column(
       children: [
         Avatar(photoUrl: user.photoURL, radius: 50),
-        SizedBox(height: 8),
-        if (user.displayName != null)
+        if (user.displayName != null) ...[
           Text(
             user.displayName,
             style: TextStyle(color: Colors.white),
           ),
-        SizedBox(height: 8),
+          SizedBox(height: 8),
+        ]
       ],
     );
   }
