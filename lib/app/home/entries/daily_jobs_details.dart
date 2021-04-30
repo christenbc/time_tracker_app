@@ -46,7 +46,7 @@ class DailyJobsDetails {
   static List<DailyJobsDetails> all(List<EntryJob> entries) {
     final byDate = _entriesByDate(entries);
     List<DailyJobsDetails> list = [];
-    for (var date in byDate.keys) {
+    for (var date in byDate.keys.toList().reversed) {
       final entriesByDate = byDate[date];
       final byJob = _jobsDetails(entriesByDate);
       list.add(DailyJobsDetails(date: date, jobsDetails: byJob));
