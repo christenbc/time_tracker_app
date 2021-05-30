@@ -3,11 +3,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:time_tracker/common_widgets/custom_raised_button.dart';
 
 void main() {
-  testWidgets('', (WidgetTester tester) async {
+  testWidgets('onPressed callback', (WidgetTester tester) async {
+    var pressed = false;
     await tester.pumpWidget(
       MaterialApp(
         home: CustomRaisedButton(
           child: Text('tap me'),
+          onPressed: () => pressed = true,
         ),
       ),
     );
@@ -15,5 +17,7 @@ void main() {
     expect(button, findsOneWidget);
     expect(find.byType(FlatButton), findsNothing);
     expect(find.text('tap me'), findsOneWidget);
+    await tester.tap(button); // use always await when calling tester methods
+    expect(pressed, true);
   });
 }
