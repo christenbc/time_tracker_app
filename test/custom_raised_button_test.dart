@@ -4,6 +4,16 @@ import 'package:time_tracker/common_widgets/custom_raised_button.dart';
 
 void main() {
   testWidgets('', (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(home: CustomRaisedButton()));
+    await tester.pumpWidget(
+      MaterialApp(
+        home: CustomRaisedButton(
+          child: Text('tap me'),
+        ),
+      ),
+    );
+    final button = find.byType(RaisedButton);
+    expect(button, findsOneWidget);
+    expect(find.byType(FlatButton), findsNothing);
+    expect(find.text('tap me'), findsOneWidget);
   });
 }
