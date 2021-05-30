@@ -5,11 +5,13 @@ abstract class StringValidator {
 class NonEmptyStringValidator implements StringValidator {
   @override
   bool isValid(String value) {
+    if (value == null) return false;
     return value.isNotEmpty;
   }
 }
 
-class EmailAndPasswordValidators { // this is the mixin
+class EmailAndPasswordValidators {
+  // this is the mixin
   final StringValidator emailValidator = NonEmptyStringValidator();
   final StringValidator passwordValidator = NonEmptyStringValidator();
   final String invalidEmailErrorText = 'Email can\'t be empty';
