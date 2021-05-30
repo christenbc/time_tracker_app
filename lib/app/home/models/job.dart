@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 
 class Job {
@@ -24,5 +26,18 @@ class Job {
       'name': name,
       'ratePerHour': ratePerHour,
     };
+  }
+
+  @override
+  int get hashCode => hashValues(id, name, ratePerHour);
+
+  @override
+  bool operator ==(other) {
+    if (identical(this, other)) return true;
+    if (runtimeType != other.runtimeType) return false;
+    final Job otherJob = other;
+    return id == otherJob.id &&
+        name == otherJob.name &&
+        ratePerHour == otherJob.ratePerHour;
   }
 }
