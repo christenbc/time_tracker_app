@@ -1,4 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 import 'package:time_tracker/app/home/job_entries/format.dart';
 
 void main() {
@@ -14,6 +16,19 @@ void main() {
     });
     test('decimal', () {
       expect(Format.hours(4.5), '4.5h');
+    });
+  });
+
+  group('date - GB Local', () {
+    setUp(() async {
+      Intl.defaultLocale = 'en_GB';
+      await initializeDateFormatting(Intl.defaultLocale);
+    });
+    test('2019-08-12', () {
+      expect(
+        Format.date(DateTime(2019, 8, 12)),
+        '12 Aug 2019',
+      );
     });
   });
 }
