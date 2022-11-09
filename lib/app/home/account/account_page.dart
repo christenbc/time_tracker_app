@@ -37,7 +37,7 @@ class AccountPage extends StatelessWidget {
         title: Text('Account'),
         centerTitle: true,
         actions: [
-          FlatButton(
+          TextButton(
             child: Text(
               'Logout',
               style: TextStyle(fontSize: 18.0, color: Colors.white),

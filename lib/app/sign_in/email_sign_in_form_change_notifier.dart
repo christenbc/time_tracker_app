@@ -24,12 +24,10 @@ class EmailSignInFormChangeNotifier extends StatefulWidget {
   }
 
   @override
-  _EmailSignInFormChangeNotifierState createState() =>
-      _EmailSignInFormChangeNotifierState();
+  _EmailSignInFormChangeNotifierState createState() => _EmailSignInFormChangeNotifierState();
 }
 
-class _EmailSignInFormChangeNotifierState
-    extends State<EmailSignInFormChangeNotifier> {
+class _EmailSignInFormChangeNotifierState extends State<EmailSignInFormChangeNotifier> {
   // text editing controller and focus node widgets internally modifies state,
   // that is why a stateful widget is required
   final TextEditingController _emailController = TextEditingController();
@@ -56,9 +54,7 @@ class _EmailSignInFormChangeNotifierState
   }
 
   void _emailEditingComplete() {
-    final newFocus = model.emailValidator.isValid(model.email)
-        ? _passwordFocusNode
-        : _emailFocusNode;
+    final newFocus = model.emailValidator.isValid(model.email) ? _passwordFocusNode : _emailFocusNode;
     FocusScope.of(context).requestFocus(newFocus);
   }
 
@@ -85,7 +81,7 @@ class _EmailSignInFormChangeNotifierState
         text: model.primaryButtonText,
         onPressed: model.canSubmit ? _submit : null,
       ),
-      FlatButton(
+      TextButton(
         child: Text(model.secondaryButtonText),
         onPressed: !model.isLoading ? _toggleFormType : null,
       ),

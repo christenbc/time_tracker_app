@@ -24,8 +24,7 @@ class EmailSignInFormBlocBased extends StatefulWidget {
   }
 
   @override
-  _EmailSignInFormBlocBasedState createState() =>
-      _EmailSignInFormBlocBasedState();
+  _EmailSignInFormBlocBasedState createState() => _EmailSignInFormBlocBasedState();
 }
 
 class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
@@ -52,9 +51,7 @@ class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
   }
 
   void _emailEditingComplete(EmailSignInModel model) {
-    final newFocus = model.emailValidator.isValid(model.email)
-        ? _passwordFocusNode
-        : _emailFocusNode;
+    final newFocus = model.emailValidator.isValid(model.email) ? _passwordFocusNode : _emailFocusNode;
     FocusScope.of(context).requestFocus(newFocus);
   }
 
@@ -81,7 +78,7 @@ class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
         text: model.primaryButtonText,
         onPressed: model.canSubmit ? _submit : null,
       ),
-      FlatButton(
+      TextButton(
         child: Text(model.secondaryButtonText),
         onPressed: !model.isLoading ? _toggleFormType : null,
       ),
@@ -135,8 +132,7 @@ class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisSize:
-                  MainAxisSize.min, // minimize the length of the column
+              mainAxisSize: MainAxisSize.min, // minimize the length of the column
               children: _buildChildren(model),
             ),
           );

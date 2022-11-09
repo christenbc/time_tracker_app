@@ -6,8 +6,7 @@ import 'package:time_tracker/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker/services/database.dart';
 
 class EditJobPage extends StatefulWidget {
-  const EditJobPage({Key key, @required this.database, this.job})
-      : super(key: key);
+  const EditJobPage({Key key, @required this.database, this.job}) : super(key: key);
   final Database database;
   final Job job;
 
@@ -90,7 +89,7 @@ class _EditJobPageState extends State<EditJobPage> {
         elevation: 2.0,
         title: Text(widget.job == null ? 'New Job' : 'Edit Job'),
         actions: [
-          FlatButton(
+          TextButton(
             child: Text(
               'Save',
               style: TextStyle(
